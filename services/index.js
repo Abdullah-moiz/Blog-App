@@ -1,9 +1,9 @@
-import {request , gql} from 'graphql-request'
+import { request, gql } from 'graphql-request'
 
 const graphqlAPI = process.env.NEXT_PUBLIC_API_URL
 
 export const getPost = async () => {
-    const query = gql`
+  const query = gql`
     query MyQuery {
         postsConnection {
           edges {
@@ -32,9 +32,9 @@ export const getPost = async () => {
         }
       }
     `
-    
-    const data = await request(graphqlAPI , query)
-    return data.postsConnection.edges;
+
+  const data = await request(graphqlAPI, query)
+  return data.postsConnection.edges;
 }
 
 
@@ -60,18 +60,18 @@ export const getRecentPost = async () => {
   }
   `
 
-  const data = await request(graphqlAPI , query);
+  const data = await request(graphqlAPI, query);
   return data.posts;
 }
 
 
 // get similar post
 
-export const getSimilarPost = async () => {
+export const getSimilarPost = async (cateogries , slug) => {
   const query = gql`
-  query getPostDetails($slug: String!, $categories: [String!]) {
+  query getPostDetails($slug: String!, $cateogries: [String!]) {
     posts(
-      where: {slug_not: $slug , AND: {categories_some : {slug_in: $categories}}}
+      where: {slug_not: $slug , AND: {cateogries_some : {slug_in: $cateogries}}}
       last: 3
     ){
       title,
@@ -81,7 +81,7 @@ export const getSimilarPost = async () => {
     }
   }
   `
-  const data = await request(graphqlAPI , query);
+  const data = await request(graphqlAPI, query , { cateogries, slug: String(slug)});
   return data.posts;
 
 }
@@ -99,6 +99,51 @@ export const getCategories = async () => {
     }
   }
   `
-  const data = await request(graphqlAPI , query);
+  const data = await request(graphqlAPI, query);
   return data.cateogries;
+}
+
+
+// get Post details
+export const getPostDetails = async (slug) => {
+  const query = gql`
+  query getPostDetails($slug: String!) {
+    posts(where: {slug: $slug}) {
+            author {
+              bio
+              id
+              name
+              profileImage {
+                url
+              }
+            }
+            createdAt
+            excerpt
+            featuredImage {
+              url
+            }
+            title
+            slug
+            cateogries {
+              name
+              slug
+            }
+            content {
+              raw
+            }
+        }
+      }
+  `
+
+  const data = await request(graphqlAPI, query , {slug})
+  return data.posts;
+}
+
+
+export const submitComment = async (obj) => {
+ const result = await fetc('/api/comment' , {
+    method: 'POST',
+    body : JSON.stringify(obj),
+ }) 
+ return result.json();
 }

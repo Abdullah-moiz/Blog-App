@@ -3,17 +3,17 @@ import moment from 'moment/moment'
 import Link from 'next/link'
 import { getRecentPost , getSimilarPost } from '@/services'
 
-export default function PostWidget({categories , slug}) {
+export default function PostWidget({cateogries , slug}) {
   const [relatedPost, setRelatedPost] = React.useState([])
 
   useEffect(() => {
     if(slug)
     {
-      getSimilarPost(categories, slug).then((result) => setRelatedPost(result));
+      getSimilarPost(cateogries, slug).then((result) => setRelatedPost(result));
     }
     else
     {
-      getRecentPost(categories , slug).then((result) => setRelatedPost(result));
+      getRecentPost(cateogries , slug).then((result) => setRelatedPost(result));
     }
   }, [slug])
 
@@ -36,7 +36,7 @@ export default function PostWidget({categories , slug}) {
               <p className='text-gray-600 font-xs'>
                 {moment(post.createdAt).format('DD MMMM YYYY')}
               </p>
-              <Link href={`/post/${post.slug}`} key={post.title}  className="">
+              <Link href={`/posts/${post.slug}`} key={post.title}  className="">
                 {post.title}
               </Link>
             </div>
