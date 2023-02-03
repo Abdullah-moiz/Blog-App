@@ -141,7 +141,7 @@ export const getPostDetails = async (slug) => {
 
 
 export const submitComment = async (obj) => {
- const result = await fetc('/api/comment' , {
+ const result = await fetch('/api/comment' , {
     method: 'POST',
     body : JSON.stringify(obj),
  }) 

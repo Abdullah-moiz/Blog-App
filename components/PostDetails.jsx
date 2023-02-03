@@ -55,7 +55,7 @@ export default function PostDetails({ post }) {
 
   return (
     <div className='bg-white text-black shadow-lg rounded-lg lg:pg-8 pb-12 mb-8'>
-      <div className='relative overflow-hidden h-96 border-2 border-red-600 shadow-md mb-6'>
+      <div className='relative overflow-hidden h-96  shadow-md mb-6'>
         <img src={image} alt={title} className="text-black h-full w-full object-cover object-center rounded-t-lg" />
       </div>
       <div className='px-4 lg:px-8'>
