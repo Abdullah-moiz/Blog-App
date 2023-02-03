@@ -47,3 +47,5 @@ export default function Home({ posts }) {
     </div>
   )
 }
+
+// just a test
