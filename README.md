@@ -1,5 +1,7 @@
 # Blog-app 
 
+#### Builded Using NEXT JS &, Tailwind css & GraphQP API's
+
 #screenshots
 ![image](https://user-images.githubusercontent.com/90745903/216593107-3cb2e703-e219-4972-ba6e-b4d419785946.png)
 ![image](https://user-images.githubusercontent.com/90745903/216593126-fa371339-d1cd-47c6-9733-297a0ccf261a.png)
